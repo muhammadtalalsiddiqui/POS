@@ -1,0 +1,21 @@
+
+<table class="table table-hover" style="width: 90%; margin: auto;">
+  <thead>
+    <tr style="color: black;">
+      <th  scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div *ngFor="let i of bd">
+    <tr *ngFor="let j of i.basketItems "style="color: black;background: white;">
+      <td>{{i.id}}</td>
+      <th scope="row">{{j.productName}}</th>
+
+
+
+    </tr>
+  </div>
+  </tbody>
+</table>

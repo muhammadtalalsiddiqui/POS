@@ -1,0 +1,188 @@
+<div class="wrapper">
+
+  <!-- Sidebar  -->
+
+
+  <!-- Page Content  -->
+  <div id="content">
+
+    <nav style="margin-top: -20px; width: 950px;margin-left: -20px; margin-right: -50px;" class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto " type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-align-justify"></i>
+        </button>
+        <div class="input-group">
+          <div id="search-autocomplete" class="form-outline">
+            <input placeholder="Search.." type="search" id="form1" class="form-control" />
+
+          </div>
+          <button style="height: 38px;" type="button" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
+          <p style="width: 150px;margin-left: 30px;">Role: {{role}}</p>
+
+          <p style="width: 400px;margin-left: 300px;height: 20px;">ID: {{empid}}</p>
+
+        </div>
+
+
+
+
+      </div>
+    </nav>
+    <section>
+
+
+
+      <div class="container">
+        <div class="row">
+          <!----- <div *ngFor="let i of bd"> --->
+          <div class="col-md-3 mt-4" *ngFor="let j of showprod" style="margin-left: 30px;">
+            <div class="card profile-card-8">
+              <div class="card-img-block"style="margin-top:20px;">
+                <img class="card-img-top" src="{{j.pictureUrl}}" alt="Card image cap">
+              </div>
+              <div class="card-body pt-0" style="width: 300px;">
+                <p style="font-size:15px;margin-top:-210px;margin-left: -20px;font-weight: bold; margin-left:-10px; z-index: 100000px; background-color:transparent;width: 50px; color:rgb(255, 0, 0)"
+                  class="card-text"> $ {{j.price}} </p>
+
+                <h5
+                  style="margin-top:190px;color: black; width: 150px; height: 50px; font-weight: bolder; font-family:Georgia, 'Times New Roman', Times, serif;font-size: 15px;"
+                  class="card-title">{{j.title}}</h5>
+
+
+
+                <p style="font-size:10px; margin-left:80px;margin-top: -50px;display: none;" class="card-text">
+                  Available Items: {{j.stock}}
+                </p>
+                <table style="margin-left: 40px;margin-top: -20px;">
+                  <tr>
+                    <td>
+                      <svg id="minus" (click)='lessquantity()' xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        fill="grey" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                      </svg>
+
+                    </td>
+                    <td>
+                      <h4 style="margin-top: 20px; margin-left: 10px;margin-right: 10px;">{{quantity}}</h4>
+                    </td>
+                    <td><svg (click)='addquantity(j.stock)' xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        fill="#4BB543" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                      </svg></td>
+                  </tr>
+                </table>
+
+
+
+
+
+                <button (click)='add(j.id)' style="margin-top: -10px;margin-left: 20px;" type="button"
+                  class=" btn btn-success">Add to Cart</button>
+
+
+
+              </div>
+            </div>
+
+          </div>
+          <!---- </div>  --->
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <nav id="sidebar">
+    <div style="height:100px" class="sidebar-header navbar-light bg-light">
+      <h3>OpenCart</h3>
+
+
+    </div>
+
+    <ul class="list-unstyled components" style="margin-left: 30px;">
+      <h2
+        style="align-items: center;align-content: center; font-weight: bolder; font-family:Georgia, 'Times New Roman', Times, serif;margin-left: 60px;">
+        CURRENT BASKET</h2><button style="margin-top: -30px; margin-left: 270px;height: 35px; width: 90px;" type="button" class="btn btn-primary">Clear </button>
+      <table style="margin-left: -30px;border: transparent;" class="table">
+        <thead style="border: transparent;">
+
+          <td style="font-weight: lighter;font-family: 'Times New Roman', Times, serif;font-size: small;">Item</td>
+          <td></td><td style="font-weight: lighter;font-family: 'Times New Roman', Times, serif;font-size: small;">Name</td>
+          <td></td>
+          <td></td> <td></td>
+          <td></td>
+          <td style="font-weight: lighter;font-family: 'Times New Roman', Times, serif;font-size: small;">Rate</td>
+          <td style="font-weight: lighter;font-family: 'Times New Roman', Times, serif;font-size: small;">Quantity </td>
+
+
+
+
+
+
+        </thead>
+      </table>
+      <table style="margin-left: -30px;border: transparent;" class="table">
+
+
+          <div *ngFor="let b of bd">
+
+            <tr *ngFor="let j of b.basketItems"    >
+
+              <td><img style="width: 40px;height:40px" src="{{j.pictureUrl}}" ></td>
+              <td>
+                <p
+                  style="font-weight: lighter;font-size: small;font-family:Georgia, 'Times New Roman', Times, serif;color: black;">
+                  {{j.productName}}</p>
+              </td>
+              <td>
+                <p
+                  style="font-weight: lighter;font-size: small;font-family:Georgia, 'Times New Roman', Times, serif;color: black;">
+                  {{j.price}}</p>
+              </td>
+              <td>
+                <p
+                  style="font-weight: lighter;font-size: small; font-family:Georgia, 'Times New Roman', Times, serif;color: black;">
+                  {{j.quantity}}</p>
+              </td>
+
+            </tr>
+            <button (click)='total(b.total)' style="margin-top: 20px;margin-left: 120px;" type="button" class=" btn btn-success">Confirm
+              Order</button>
+          </div>
+
+
+
+      </table>
+
+
+    </ul>
+
+    <ul class="list-unstyled CTAs" style="margin-left: 30px;">
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">Transaction</div>
+        <div class="card-body">
+          <h5 class="card-title">Sub Total : {{totalla}}</h5>
+          <h5 class="card-title">Discount</h5>
+          <h5 class="card-title">Sales Tax</h5>
+
+        </div>
+        <div class="card-footer">
+          <h3 class="card-title">Total</h3>
+        </div>
+      </div>
+
+    </ul>
+  </nav>
+</div>

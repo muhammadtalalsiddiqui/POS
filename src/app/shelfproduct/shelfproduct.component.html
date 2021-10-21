@@ -1,0 +1,155 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Dashboard</a>
+      <a mat-list-item routerLink="/registershop">Shops</a>
+      <a mat-list-item routerLink="/productstype">Shops Product Type</a>
+      <a mat-list-item routerLink="/products">Products</a>
+      <a mat-list-item routerLink="/productshelves">Products Shelf</a>
+      <a mat-list-item routerLink="/payment">Payment Type</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="dark">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+      </button>
+
+      <span>OpenCart</span>
+
+    </mat-toolbar>
+    <section [ngSwitch]="userType" style="height: 590px
+    ">
+      <BR>
+
+        <div id="wrapper">
+
+          <!-- Sidebar -->
+
+              <div style="margin-left: 20px;">
+                <h1 style="margin-left:0px; font-weight: bolder; font-family:Georgia, 'Times New Roman', Times, serif;" class="h4 mb-0  ">Products Shelf</h1>
+        <br>
+        <button style="height: 35px; width: 90px; margin-left: 950px;" type="button" class="btn btn-primary"
+              data-toggle="modal" data-target="#myModal">
+              <p style="font-family:Georgia, 'Times New Roman', Times, serif;">Add</p>
+            </button>
+
+                <div id="myModal" class="modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Add Shelf Products</h5>
+
+                      </div>
+                      <div class="modal-body">
+                        <form [formGroup]="productshelfform" (ngSubmit)="add()" class="form-horizontal" method="post" name="signup"
+                          id="signup" enctype="multipart/form-data">
+                          <div class="form-group">
+                            <label class="control-label col-sm-3">Title <span class="text-danger">*</span></label>
+                            <div class="col-md-8 col-sm-9">
+                              <div class="input-group">
+                                <input formControlName="title" class="form-control" id="ab">
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="form-group">
+
+                            <div class="dropdown" style="margin-top: 0px;margin-left: 10px;">
+                              <button  class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Shops
+                              </button>
+                              <ul  class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                                <div *ngFor="let i of shopdata">
+                                  <li><a  type="button"(click)='addu(i.id)'  class="dropdown-item"><p> {{i.title}}</p></a></li>
+
+                                </div>
+
+                              </ul>
+                            </div>
+
+
+                          </div>
+
+                          <div class="modal-footer">
+                            <div class="col-xs-offset-3 col-xs-10">
+                              <input name="Submit" type="submit" value="Add" class="btn btn-primary">
+                            </div>
+                          </div>
+                        </form>
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="dropdown" style="margin-top: -40px;">
+                  <button  class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Shops
+                  </button>
+                  <ul  class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                    <div *ngFor="let i of shopdata">
+                      <li><a  type="button" (click)='select(i.id)' class="dropdown-item"><p> {{i.title}}</p></a></li>
+                    </div>
+
+                  </ul>
+                </div>
+                <br><br>
+                <div class="table-responsive">
+                  <table class="table table-hover" style="width: 90%; margin: auto;">
+                    <thead>
+                      <tr style="color: black;">
+                        <th  scope="col">Id</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let i of productshelfdata"style="color: black;background: white;">
+                        <th scope="row">{{i.id}}</th>
+                        <td>{{i.title}}</td>
+                        <td> <button id="del" type="button" (click)='delete(i.id)' class="" >
+                          <p
+                            style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: smaller; margin-top: -5px;border-width: 0.1px;">
+                            Delete</p>
+                        </button></td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+
+    </section>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
+
+
+

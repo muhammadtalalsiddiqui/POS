@@ -1,0 +1,316 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Dashboard</a>
+      <a mat-list-item routerLink="/registershop">Shops</a>
+      <a mat-list-item routerLink="/productstype">Shops Product Type</a>
+      <a mat-list-item routerLink="/products">Products</a>
+      <a mat-list-item routerLink="/productshelves">Products Shelf</a>
+      <a mat-list-item routerLink="/payment">Payment Type</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="dark">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+      </button>
+
+      <span>OpenCart</span>
+
+    </mat-toolbar>
+    <section [ngSwitch]="userType" style="height: 590px
+    ">
+      <BR>
+        <div id="wrapper">
+
+          <!-- Sidebar -->
+
+          <div style="margin-left: 20px;">
+
+            <h1 style="margin-left:0px; font-weight: bolder; font-family:Georgia, 'Times New Roman', Times, serif;"
+              class="h3 mb-0  ">Products</h1>
+            <br>
+            <button style="height: 35px; width: 90px; margin-left: 950px;" type="button" class="btn btn-primary"
+              data-toggle="modal" data-target="#myModal">
+              <p style="font-family:Georgia, 'Times New Roman', Times, serif;">Add</p>
+            </button>
+            <div  class="dropdown" style="margin-top: 0px;margin-left: 10px; ">
+              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent;color: black;">
+                Select Shop
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                <div *ngFor="let i of shopdata">
+                  <li><a style="color: black;" type="button" (click)='select(i.id)'
+                      class="dropdown-item">
+                      <p> {{i.title}}</p>
+                    </a></li>
+
+                </div>
+
+              </ul>
+            </div>
+            <div id="myModal" class="modal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Add Products</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="productform"  class="form-horizontal" method="post" name="signup"
+                      id="signup" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="control-label col-sm-3">Title <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                          <div class="input-group">
+                            <input #title formControlName="title" class="form-control" id="ab">
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <table>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <label class="control-label col-sm-3">Price <span class="text-danger"></span></label>
+                              <div class="col-md-8 col-sm-9">
+                                <div class="input-group">
+                                  <input #price formControlName="price" class="form-control" id="ab">
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group ">
+                              <label class="control-label col-sm-3">Stock <span class="text-danger"></span></label>
+                              <div class="col-md-8 col-sm-9">
+                                <div class="input-group">
+                                  <input #stock formControlName="stock" class="form-control" id="ab">
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group ">
+                              <label class="control-label col-sm-3">Min.Threshold<span class="text-danger"></span></label>
+                              <div class="col-md-8 col-sm-9">
+                                <div class="input-group">
+                                  <input #minthres formControlName="minimumThreshold" class="form-control" id="ab">
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+
+
+
+
+                      <div  class="form-group">
+                        <div class="dropdown" style="margin-top: 0px;margin-left: 10px;">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent;color: black;">
+                            {{unittext}}
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+
+                            <li><a type="button" (click)='Unit(1,"kg")' class="dropdown-item">
+                                <p> Kg</p>
+                              </a></li>
+                            <li><a type="button" (click)='Unit(2,"unit")' class="dropdown-item">
+                                <p> Unit</p>
+                              </a></li>
+                            <li><a type="button" (click)='Unit(3,"Gram")' class="dropdown-item">
+                                <p> Gram</p>
+                              </a></li>
+                            <li><a type="button" (click)='Unit(4,"Ton")' class="dropdown-item">
+                                <p> Ton</p>
+                              </a></li>
+
+                          </ul>
+                        </div>
+                      </div>
+                      <div id="shop" class="form-group">
+
+                        <div class="dropdown" style="margin-top: 0px;margin-left: 10px; ">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent;color: black;">
+                            Select Shops
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                            <div *ngFor="let i of shopdata">
+                              <li><a style="color: black;" type="button" (click)='addu(i.id)' class="dropdown-item">
+                                  <p> {{i.title}}</p>
+                                </a></li>
+
+                            </div>
+
+                          </ul>
+                        </div>
+
+
+                      </div>
+                      <div id="ptypedrop" class="form-group">
+
+                        <div class="dropdown" style="margin-top: 0px;margin-left: 10px; ">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent;color: black;">
+                            {{pt}}
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                            <div *ngFor="let i of producttypedata">
+                              <li><a style="color: black;" type="button" (click)='prod_type_id(i.id,i.title)'
+                                  class="dropdown-item">
+                                  <p> {{i.title}}</p>
+                                </a></li>
+
+                            </div>
+
+                          </ul>
+                        </div>
+
+
+                      </div>
+                      <div id="pshelvedrop" class="form-group">
+
+                        <div class="dropdown" style="margin-top: 0px;margin-left: 10px; ">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent;color: black;">
+                            {{psel}}
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+
+                            <div *ngFor="let i of productshelfdata">
+                              <li><a style="color: black;" type="button" (click)='prod_shelve_id(i.id,i.title)'
+                                  class="dropdown-item">
+                                  <p> {{i.title}}</p>
+                                </a></li>
+
+                            </div>
+
+                          </ul>
+                        </div>
+
+
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-3">Description<span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                          <div class="input-group">
+                            <input #desc formControlName="description" class="form-control" id="ab">
+                          </div>
+                        </div>
+
+
+                      </div>
+
+
+                      <div class="modal-footer">
+                        <div class="col-xs-offset-3 col-xs-10">
+                          <input (click)="add(title.value,price.value,stock.value,minthres.value,desc.value)" value="Add" class="btn btn-primary">
+                        </div>
+                      </div>
+
+                    </form>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <br><br>
+            <div class="table-responsive">
+              <table class="table table-hover" style="width: 90%; margin: auto;">
+                <thead>
+                  <tr style="color: black; font-weight:lighter;">
+                    <th style="color: black; font-weight:normal;" scope="col">Id</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Title</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Unit</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Picture</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Price</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Stock</th>
+                    <th style="color: black; font-weight:normal;" scope="col">MinThreshold</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Shelves</th>
+                    <th style="color: black; font-weight:normal;" scope="col">ProdTypeId</th>
+                    <th style="color: black; font-weight:normal;" scope="col">Description</th>
+                    <th style="color: black; font-weight:normal;" scope="col">ProdTypeName</th>
+                    <th scope="col"></th>
+                    <th style="color: black; font-weight:normal;" scope="col">Action</th>
+                    <th scope="col"></th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i of productsdata" style="color: black;background: white;">
+                    <td>{{i.id}}</td>
+                    <td>{{i.title}}</td>
+                    <td>{{i.unitOfMeasure}}</td>
+                    <td style="width: 1px;"> <img src='{{"api."+i.pictureUrl}}' height="60px" width="60px" alt=""></td>
+                    <td>{{i.price}}</td>
+                    <td>{{i.stock}}</td>
+                    <td>{{i.minimumThreshold}}</td>
+                    <td>{{i.shelve}}</td>
+                    <td>{{i.productTypeId}}</td>
+                    <td>{{i.description}}</td>
+                    <td>{{i.productTypeName}}</td>
+                    <td> <button id="del" type="button" (click)='delete(i.id)' class="btn btn-primary">
+                        <p
+                          style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: smaller; margin-top: -5px;border-width: 1px;">
+                          Delete</p>
+                      </button></td>
+                    <td> <button id="edit" type="button" (click)='delete(i.id)' class="btn btn-primary">
+                        <p
+                          style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: smaller; margin-top: -5px;border-width: 1px;">
+                          Edit</p>
+                      </button></td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+    </section>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

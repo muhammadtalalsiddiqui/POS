@@ -1,0 +1,70 @@
+<h1>helkki</h1>
+<div class="main">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <section>
+          <h1 style="margin-top: 50px;" class="entry-title"><span>Register</span> </h1>
+          <hr>
+          <form [formGroup]="regform" (ngSubmit)="signup()" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data">
+            <div class="form-group">
+              <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+              <div class="col-md-8 col-sm-9">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <input formControlName="email" type="email" class="form-control" name="emailid" id="emailid" placeholder="Enter your Email ID"
+                    value="">
+                </div>
+                <small> Your Email Id is being used for ensuring the security of your account, authorization and access
+                  recovery. </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
+              <div class="col-md-5 col-sm-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input formControlName="password" type="password" class="form-control" name="password" id="password"
+                    placeholder="Choose password (5-15 chars)" value="">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+              <div class="col-md-5 col-sm-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <input formControlName="confirmPassword" type="password" class="form-control" name="cpassword" id="cpassword"
+                    placeholder="Confirm your password" value="">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
+              <div class="col-md-8 col-sm-9">
+                <input formControlName="displayName" type="text" class="form-control" name="mem_name" id="mem_name" placeholder="Enter your Name here"
+                  value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span
+                    class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a>
+                  and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-offset-3 col-xs-10">
+                <input  name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+

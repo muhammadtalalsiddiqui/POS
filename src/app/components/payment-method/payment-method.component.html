@@ -1,0 +1,141 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Dashboard</a>
+      <a mat-list-item routerLink="/registershop">Shops</a>
+      <a mat-list-item routerLink="/productstype">Shops Product Type</a>
+      <a mat-list-item routerLink="/products">Products</a>
+      <a mat-list-item routerLink="/productshelves">Products Shelf</a>
+      <a mat-list-item routerLink="/payment">Payment Type</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="dark">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+
+      </button>
+
+      <span>OpenCart</span>
+
+    </mat-toolbar>
+    <section [ngSwitch]="userType" style="height: 590px
+    ">
+      <BR>
+        <div id="wrapper">
+
+
+          <div style="margin-left: 20px;">
+            <h1 style="margin-left:0px; font-weight: bold;font-family:Georgia, 'Times New Roman', Times, serif;" class="h4 mb-0  ">Payement Method</h1>
+            <button id="add" style="height: 35px; width: 90px; margin-left: 920px;" type="button" class="btn btn-primary"
+              data-toggle="modal" data-target="#myModal2">
+              <p style=" font-size: smaller; margin-top: -2px;border-width: 0.1px;">Add</p>
+            </button>
+
+            <div id="myModal2" class="modal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Add Payment Method</h5>
+
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="paymentform" (ngSubmit)="add()" class="form-horizontal" method="post" name="signup"
+                      id="signup" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="control-label col-sm-3">Payment Type <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                          <div class="input-group">
+                            <input formControlName="type" class="form-control">
+                          </div>
+                        </div>
+
+                        <label class="control-label col-sm-3">Description <span class="text-danger">*</span></label>
+                        <div class="col-md-8 col-sm-9">
+                          <div class="input-group">
+
+                            <textarea formControlName="description" class="form-control" id="exampleFormControlTextarea1"
+                              rows="3"></textarea>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <div class="col-xs-offset-3 col-xs-10">
+                          <input name="Submit" type="submit" value="Add" class="btn btn-primary">
+                        </div>
+                      </div>
+                    </form>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <br>
+
+
+            <div class="table-responsive">
+              <table class="table table-hover" style="margin: auto; width: 90%;">
+                <thead>
+                  <tr style="color: black;">
+                    <th scope="col">Id</th>
+                    <th scope="col">Payment Type</th>
+
+                    <th scope="col">Description</th>
+
+
+                    <th scope="col">Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i of paymentdata" style="color: black;background: white;">
+                    <th scope="row">{{i.id}}</th>
+                    <td>{{i.type}}</td>
+                    <td>{{i.description}}</td>
+
+                    <td > <button id="del" type="button" (click)='delete(i.id)' class="" >
+                      <p
+                        style="font-family:Georgia, 'Times New Roman', Times, serif; font-size: smaller; margin-top: -5px;border-width: 0.1px;">
+                        Delete</p>
+                    </button></td>
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+
+        <br><br>
+
+
+
+    </section>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
